@@ -1,0 +1,77 @@
+:root{
+  --mainBlue:#2a2a72;
+  --mainColor: #8257e5;
+  --lightBlue:#009ffd;
+  --mainWhite:#f3f3f3;
+  --mainDark:#232528;
+  --mainBlack: #000000;
+  --mainYellow:#ffa400;
+  --mainRed:#FF0000;
+}
+body{
+  font-family: 'Oswald', sans-serif !important;
+  background: var(--mainWhite) !important;
+  color: var(--mainDark) !important;
+}
+.text-title{
+  font-family: 'Merienda', cursive;
+  letter-spacing: 0.3rem;
+  text-transform: uppercase;
+}
+.text-title-trabalho{
+  font-family: 'Merienda', cursive;
+  letter-spacing: 0.3rem;
+  text-transform: uppercase;
+  color: var(--mainDark);
+}
+.text-autor{
+  font-family: 'Patrick Hand', cursive;
+  letter-spacing: 0.3rem;
+  text-transform: uppercase;
+  color: var(--mainDark);
+}
+.text-mainColor{
+  color: var(--mainColor);
+}
+.text-mainYellow{
+  color: var(--mainYellow);
+}
+.text-dark{
+  color:var(--mainDark);
+}
+.text-black{
+  color:var(--mainBlack);
+}
+.text.bright{
+  color: var(--lightBlue)
+}
+#imag{
+  border: 1px solid var(--mainDark);
+  border-radius: 4px;
+}
+#preco{
+  font-weight: bold;
+  color: var(--mainDark);
+}
+#informacao{
+  text-transform: capitalize;
+  font-weight: bold;
+  font-family: 'Kalam', cursive;
+  size: 50px;
+}
+#favoritado{
+    color: var(--mainYellow);
+}
+input[type=text], select {
+  width: 60%;
+  text-align: center;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid var(--mainDark);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+#link{
+  color:var(--mainBlack);
+}
