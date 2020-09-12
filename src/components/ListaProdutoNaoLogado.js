@@ -99,10 +99,6 @@ export default class ListaProduto extends Component {
                         {servico.titulo}
                     </Link>
                     </p>
-                    <h5 className="font-italic mb-0">
-                        <span className="mr-1">R$</span>
-                        {servico.preco}
-                    </h5>
               </div>
             )}
             </ConsumidorServico>
@@ -168,7 +164,7 @@ export default class ListaProduto extends Component {
             <div className="row">
             <div className="col">
                 <center>
-                  <Titulo nome="Nossos" titulo="Currículos"></Titulo>
+                  <Titulo nome="Nossas" titulo="Vagas"></Titulo>
                   <p>
                   <span>
                     <i class="fas fa-search"></i>

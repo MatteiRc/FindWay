@@ -55,22 +55,17 @@ export default class Detalhes extends Component {
                                         {nome}    
                                         </span>
                                     </h4>
-                                    <h4>
-                                        <p id="cidade">Cidade: {cidade} 
-                                            &emsp;&emsp;
-                                        </p>
-                                    </h4>
-                                    <h4 id="informacao">DESCRIÇÃO SOBRE O SERVIÇO</h4>
+                                    <h4 id="informacao">Resumo de Qualificações</h4>
                                     <p className="text-muted lead">{info}</p>
-                                    <div class = "classificacao">
-                                    </div>
+                                    <h4 id="horario">Formação Acadêmica: </h4>
+                                    <p className="text-muted lead">{horario}</p>        
                                     <div>
                                         <Link to='/usuariologado'>
                                             <ButtonServicos>
                                                 <span className="mr-2"> 
                                                     <i className="fas fa-arrow-left"></i>
                                                 </span>
-                                                Voltar para Serviços
+                                                Voltar
                                             </ButtonServicos>
                                         </Link>
                                     </div>   

@@ -158,7 +158,7 @@ export default class ListaProduto extends Component {
             <div className="row">
             <div className="col">
                 <center>
-                  <Titulo nome="Nossos" titulo="Currículos"></Titulo>
+                  <Titulo nome="Seus" titulo="Currículos"></Titulo>
                   <p>
                   <span>
                     <i class="fas fa-search"></i>
