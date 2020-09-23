@@ -104,40 +104,29 @@ export default class Servico extends Component{
             <form method = "POST" onSubmit = {e => this.save(e)}>
                 <form method="get" action="/listaservicos">
                     <button>
-                    <span className="mr-2">
-                        <i className="fas fa-arrow-left"></i>
-                    </span>
+                        <span className="mr-2">
+                            <i className="fas fa-arrow-left"></i>
+                        </span>
                         Voltar
                     </button>
                 </form>
                 <div class = "form">
                 <div class = "input area">
-                <label for = "titulo">Titulo do Serviço</label>
+                <label for = "titulo">Objetivo</label>
                 <br/>
                 <input type = "text" name = "titulo" id = "titulo" value ={this.state.anuncio.titulo} onChange ={e => this.updateField(e)}/>
                 </div>
                 <div class = "input area">
-                <label for = "cidade">Cidade</label>
                 <br/>
-                <input type = "text" name = "cidade" id="cidade" value = {this.state.anuncio.cidade} onChange = {e =>this.updateField(e)}/>
-                </div>
-                <div class = "input area">
-                <br/>
-                <label for = "descricao">Descrição</label>
-                <br/>
+                <label for = "descricao">Resumo de Qualificações</label>
+                <br/> 
                 <textarea type = "text" name = "descricao" id = "descricao" value = {this.state.anuncio.descricao} onChange = {e => this.updateField(e)}/>
                 </div>
                 <div class = "input area">
                 <br/>
-                <label for = "horarios">Horários disponíveis</label>
+                <label for = "horarios">Formação Acadêmica</label>
                 <br/>
                 <input type = "text" name = "horarios" id = "horarios" value ={this.state.anuncio.horarios} onChange = {e => this.updateField(e)}/>
-                </div>
-                <div class = "Number area">
-                <br/>
-                <label for = "valor">Valor do serviço/hora</label>
-                <br/>
-                <input type = "number" id = "valor" name = "valor" min = "0" max = "100000"  step = "0.01" value = {this.state.anuncio.valor} onChange ={e => this.updateField(e)}/>
                 </div>
                 <div class = "File">
                 <br/>

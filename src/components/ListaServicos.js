@@ -62,14 +62,6 @@ export default class ListaServicos extends Component {
                             <Link to="/editarservicos" onClickCapture = {e => this.StoreId(servico.id)}>
                                 <img src={servico.img} alt="product" className="card-img-top" />  
                             </Link>
-                            <Link to='/chat'>
-                                <ButtonDelete className="card-btn">
-                                    <span className="mr-2">
-                                        <i class="fas fa-trash"></i>
-                                    </span>
-                                      Deletar
-                               </ButtonDelete>
-                            </Link>
                         </div>
                     )}
             </ConsumidorServico>
@@ -81,10 +73,7 @@ export default class ListaServicos extends Component {
                         {servico.titulo}
                     </Link>
                     </p>
-                    <h5 className="font-italic mb-0">
-                        <span className="mr-1">R$</span>
-                        {servico.preco}
-                    </h5>
+                    
               </div>
             )}
             </ConsumidorServico>
@@ -111,7 +100,7 @@ export default class ListaServicos extends Component {
             <div className="row">
               <div className="col">
                 <center>
-                  <Titulo nome="Seus" titulo="Serviços"></Titulo>
+                  <Titulo nome="Seus" titulo="Currículos"></Titulo>
                   <p>
                   <span>
                     <i class="fas fa-search"></i>
