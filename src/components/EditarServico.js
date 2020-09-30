@@ -137,8 +137,8 @@ export default class Servico extends Component{
                 <br/>
                 </div>
                 <div class = "Button area">
-                <button id = "cadastrarservico" type = "submit" disabled = {this.state.isEmpty}>Atualizar Serviço</button>
-                <button id = "cadastrarservico" onClick = {e => this.delete(e)} disabled = {this.state.isEmpty}>Deletar Serviço</button>
+                <button id = "cadastrarservico" type = "submit" disabled = {this.state.isEmpty}>Atualizar Currículo</button>
+                <button id = "cadastrarservico" onClick = {e => this.delete(e)} disabled = {this.state.isEmpty}>Deletar Currículo</button>
                 </div>
             </div>
              </form>

@@ -315,7 +315,6 @@ export default class App extends React.Component {
             </div>
             <div className="createAccount">
               <button type="submit">Atualizar</button>
-              <button className="clique" onclick = {e => this.delete(e)}>Deletar Conta</button>
             </div>
           </form>
         </div>
