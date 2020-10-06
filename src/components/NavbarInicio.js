@@ -17,7 +17,15 @@ export default class NavbarInicio extends Component{
                             <span className="mr-2"> 
                                 <i class="fas fa-user"></i>
                             </span>
-                                Login/Cadastro
+                                Usuario
+                        </ButtonServicos>
+                    </Link>
+                    <Link to='/loginEmpresa' className="ml-auto">
+                    <ButtonServicos>
+                            <span className="mr-2"> 
+                                <i class="fas fa-building"></i>
+                            </span>
+                                Empresa
                         </ButtonServicos>
                     </Link>
                 </NavWrapper>

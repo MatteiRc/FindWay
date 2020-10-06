@@ -12,10 +12,12 @@ import Favoritos from './components/Favoritos/Favoritos.js';
 import DetalhesFav from './components/DetalhesFav.js';
 import Servicos from './components/Servicos.js'
 import LoginCadastro from './components/login/src/index.js';
+import LoginEmpresa from './components/login/src/loginEmpresa.js'
 import ListaProduto from './components/ListaProdutoLogado.js';
 import DetalhesLogado from './components/DetalhesLogado.js';
 import EditarCadastro from './components/EditarCadastro.js';
 import ListaServicos from './components/ListaServicos.js';
+import EmpresaLogado from './components/ListaVagasLogado.js'
 import EditarServicos from './components/EditarServico.js';
 function App() {
   return (
@@ -25,10 +27,12 @@ function App() {
         <Route path="/detalhes" component={DetalhesNaoLogado} />
         <Route path="/detalheslogado" component={DetalhesLogado} />
         <Route path="/login" component={LoginCadastro} />
+        <Route path="/loginEmpresa" component={LoginEmpresa} />
         <Route path="/favoritos" component={Favoritos} />
         <Route path="/detalhesfav" component={DetalhesFav} />
         <Route path="/servicos" component={Servicos} />
         <Route path="/usuariologado" component={ListaProduto} />
+        <Route path="/empresalogado" component={EmpresaLogado} />
         <Route path="/editarcadastro" component={EditarCadastro} />
         <Route path="/listaservicos" component={ListaServicos} />
         <Route path="/editarservicos" component={EditarServicos} />

@@ -46,7 +46,7 @@ export default class App extends React.Component {
       aprovadoEmail: null,
       aprovadoConfirmarSenha: null,
       aprovadoNome: null,
-      aprovadoSobrenome: null,
+      aprovadoSobrenome: true,
       aprovadoEstado: null,
       aprovadoCidade: null,
       aprovadoTelefone: null,
@@ -89,7 +89,7 @@ export default class App extends React.Component {
         axios.post('http://localhost:3001/usuario',usuario)
        .then(res =>{
          localStorage.setItem("id", res.data.id);
-         window.location.href = "http://localhost:3000/usuariologado";
+         window.location.href = "http://localhost:3000/empresalogado";
        }).catch(error=>{console.error(error.data)});
     }else{
       alert('Parece que o cadastro ainda está incompleto');
@@ -112,7 +112,7 @@ export default class App extends React.Component {
      .then(res =>{
       localStorage.setItem("id",JSON.stringify(res.data.id));
        console.log(res.data.id);
-       window.location.href = "http://localhost:3000/usuariologado";
+       window.location.href = "http://localhost:3000/empresalogado";
      }).catch(error=>{
        console.error(error)
       alert('Essa conta não existe');
@@ -193,11 +193,11 @@ export default class App extends React.Component {
             </button>
           </form>
           <div className="text-title-trabalho col-10 mx-auto text-center text-slanted my-5">
-              <h2>Login</h2>
+              <h2>Login da Empresa</h2>
             </div>
           <form onSubmit={this.handleLogin} noValidate method = "POST" >
             <div className="email">
-              <label htmlFor="emailLogin" className="text-title-trabalho">Email</label>
+              <label htmlFor="emailLogin" className="text-title-trabalho">Email da Empresa</label>
               <input
                 className={formErrors.emailLogin.length > 0 ? "error" : null}
                 placeholder="Email"
@@ -243,7 +243,7 @@ export default class App extends React.Component {
           <p></p>
           <form onSubmit={this.handleSubmit} noValidate method = "POST">
            <div className="email">
-              <label htmlFor="email" className="text-title-trabalho">Email</label>
+              <label htmlFor="email" className="text-title-trabalho">Email da Empresa</label>
               <input
                 className={formErrors.email.length > 0 ? "error" : null}
                 placeholder="Email"
@@ -284,8 +284,8 @@ export default class App extends React.Component {
                 <span className="errorMessage">{formErrors.confirmarSenha}</span>
               )}
             </div>
-            <div className="firstName">
-              <label htmlFor="nome" className="text-title-trabalho">Nome</label>
+            <div className="email">
+              <label htmlFor="nome" className="text-title-trabalho">Nome da Empresa</label>
               <input
                 className={formErrors.nome.length > 0 ? "error" : null}
                 placeholder="Nome"
@@ -296,20 +296,6 @@ export default class App extends React.Component {
               />
               {formErrors.nome.length > 0 && (
                 <span className="errorMessage">{formErrors.nome}</span>
-              )}
-            </div>
-            <div className="lastName">
-              <label htmlFor="lastName" className="text-title-trabalho">Sobrenome</label>
-              <input
-                className={formErrors.sobrenome.length > 0 ? "error" : null}
-                placeholder="Sobrenome"
-                type="sobrenome"
-                name="sobrenome"
-                noValidate
-                onChange={this.handleChange}
-              />
-              {formErrors.sobrenome.length > 0 && (
-                <span className="errorMessage">{formErrors.sobrenome}</span>
               )}
             </div>
             <div className="firstName">
