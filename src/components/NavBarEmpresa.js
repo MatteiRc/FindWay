@@ -18,7 +18,7 @@ export default class Navbar extends Component{
                 </div>
                     <a href="http://localhost:3000/servicos">Criar Vagas</a>
                     <a href="http://localhost:3000/listaservicos">Editar Vagas</a>
-                    <a href="http://localhost:3000/editarcadastro">Editar Cadastro</a>
+                    <a href="http://localhost:3000/editarempresa">Editar Cadastro</a>
                     <div class="topnav-right">
                     <a href="http://localhost:3000" onClick={this.clear}>Sair da Conta</a>
                 </div>

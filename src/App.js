@@ -19,6 +19,7 @@ import EditarCadastro from './components/EditarCadastro.js';
 import ListaServicos from './components/ListaServicos.js';
 import EmpresaLogado from './components/ListaVagasLogado.js'
 import EditarServicos from './components/EditarServico.js';
+import EditarEMpresa from './components/EditarEmpresa.js';
 function App() {
   return (
     <React.Fragment>
@@ -36,6 +37,7 @@ function App() {
         <Route path="/editarcadastro" component={EditarCadastro} />
         <Route path="/listaservicos" component={ListaServicos} />
         <Route path="/editarservicos" component={EditarServicos} />
+        <Route path="/editarempresa" component={EditarEMpresa} />
         <Route component={Default} />
         <Navbar />
         <NavBarFav />
