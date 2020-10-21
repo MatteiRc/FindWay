@@ -13,10 +13,10 @@ const emailRegex = RegExp(
     /^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s]*$/
   );
   const cepRegex = RegExp(
-    /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/
+    /^\d{5}-\d{3}$/
   );
   const cnpjRegex = RegExp(
-    /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/
+    /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/
   );
   const formValid = ({ formErrors, ...rest }) => {
     let valid = true;
@@ -197,7 +197,7 @@ export default class App extends React.Component {
         break;
       case "cep":
           formErrors.cep =
-          (value.length > 3) && cepRegex.test(value) ? "" : "exemplo 111.111.111-11";
+          (value.length > 3) && cepRegex.test(value) ? "" : "exemplo 11111-111";
           this.setState({aprovadoCep: (value.length > 3) && cepRegex.test(value)});
         break;
       case "cnpj":
