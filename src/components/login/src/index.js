@@ -12,6 +12,12 @@ const numeroRegex = RegExp(
 const cidadeEstadoRegex = RegExp(
   /^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s]*$/
 );
+const cepRegex = RegExp(
+  /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/
+);
+const cnpjRegex = RegExp(
+  /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/
+);
 const formValid = ({ formErrors, ...rest }) => {
   let valid = true;
 
@@ -41,14 +47,24 @@ export default class App extends React.Component {
       telefone: null,
       estado: null,
       cidade: null,
+      bairro: null,
+      cep: null,
+      cnpj: null,
+      empresa: null,
+      cargo: null,
       confirmarSenha: null,
       value:true,
       aprovadoEmail: null,
       aprovadoConfirmarSenha: null,
-      aprovadoNome: null,
-      aprovadoSobrenome: null,
+      aprovadoNome: false,
+      aprovadoSobrenome: true,
       aprovadoEstado: null,
       aprovadoCidade: null,
+      aprovadoBairro: null,
+      aprovadoCep: null,
+      aprovadoCnpj: true,
+      aprovadoEmpresa: true,
+      aprovadoCargo: true,
       aprovadoTelefone: null,
       formErrors: {
         nome: "",
@@ -58,6 +74,11 @@ export default class App extends React.Component {
         password: "",
         passwordLogin: "",
         cidade: "",
+        bairro: "",
+        cep: "",
+        cnpj: "",
+        empresa: "",
+        cargo: "",
         estado: "",
         confirmarSenha: "",
         telefone: "",
@@ -72,31 +93,36 @@ export default class App extends React.Component {
   handleSubmit = e => {
       e.preventDefault();
       const usuario = {
-        nome: this.state.nome + ' ' + this.state.sobrenome,
+        nome: this.state.nome,
         senha: this.state.password,
         telefone: this.state.telefone,
         estado: this.state.estado,
         cidade: this.state.cidade,
-        email: this.state.email
+        bairro: this.state.bairro,
+        cep: this.state.cep,
+        cnpj: " ",
+        empresa: " ",
+        cargo: " ",
+        email: this.state.email,
        };
     //if (formValid(this.state)) 
     if(this.state.aprovadoEmail === true &&
        this.state.aprovadoConfirmarSenha === true &&
        this.state.aprovadoNome === true && this.state.aprovadoSobrenome === true && 
        this.state.aprovadoEstado === true &&
-       this.state.aprovadoCidade === true && this.state.aprovadoTelefone === true){
+       this.state.aprovadoCidade === true && this.state.aprovadoTelefone === true && this.state.aprovadoEmpresa === true && this.state.aprovadoCargo === true && this.state.aprovadoBairro === true && this.state.aprovadoCep === true && this.state.aprovadoCnpj === true){
       
         axios.post('http://localhost:3001/usuario',usuario)
        .then(res =>{
          localStorage.setItem("id", res.data.id);
-         window.location.href = "http://localhost:3000/usuariologado";
+         window.location.href = "http://localhost:3000/empresalogado";
        }).catch(error=>{console.error(error.data)});
     }else{
       alert('Parece que o cadastro ainda está incompleto');
       console.log(this.state.aprovadoEmail,
         this.state.aprovadoConfirmarSenha, 
         this.state.aprovadoNome, this.state.aprovadoSobrenome,
-        this.state.aprovadoEstado, this.state.aprovadoCidade, this.state.aprovadoTelefone)
+        this.state.aprovadoEstado, this.state.aprovadoCidade, this.state.aprovadoTelefone, this.state.aprovadoEmpresa, this.state.aprovadoCargo, this.state.aprovadoBairro, this.state.aprovadoCep, this.state.aprovadoCnpj)
     }
   };
 
@@ -139,6 +165,31 @@ export default class App extends React.Component {
           (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Cidade invalida";
           this.setState({aprovadoCidade: (value.length > 3) && cidadeEstadoRegex.test(value)});
         break;
+      case "bairro":
+        formErrors.bairro =
+          (value.length > 3) ? "" : "Bairro invalido";
+          this.setState({aprovadoBairro: (value.length > 3)});
+        break;
+      case "cep":
+          formErrors.cep =
+          (value.length > 3) && cepRegex.test(value) ? "" : "exemplo 111.111.111-11";
+          this.setState({aprovadoCep: (value.length > 3) && cepRegex.test(value)});
+        break;
+      case "cnpj":
+          formErrors.cnpj =
+          (value.length > 3) && cnpjRegex.test(value) ? "" : "exemplo 11.111.111/1111-11";
+          this.setState({aprovadoCnpj: (value.length > 3) && cnpjRegex.test(value)});
+        break;
+      case "empresa":
+          formErrors.empresa =
+            (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Empresa invalida";
+            this.setState({aprovadoEmpresa: (value.length > 3) && cidadeEstadoRegex.test(value)});
+          break;
+      case "cargo":
+          formErrors.cargo =
+            (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Cargo invalido";
+            this.setState({aprovadoCargo: (value.length > 3) && cidadeEstadoRegex.test(value)});
+          break;
       case "telefone":
         formErrors.telefone = (numeroRegex.test(value) && value.length <= 19 && value.length >= 17)
           ? ""
@@ -284,11 +335,11 @@ export default class App extends React.Component {
                 <span className="errorMessage">{formErrors.confirmarSenha}</span>
               )}
             </div>
-            <div className="firstName">
-              <label htmlFor="nome" className="text-title-trabalho">Nome</label>
+            <div className="email">
+              <label htmlFor="nome" className="text-title-trabalho">Nome Completo</label>
               <input
                 className={formErrors.nome.length > 0 ? "error" : null}
-                placeholder="Nome"
+                placeholder="Nome do Funcionário"
                 type="nome"
                 name="nome"
                 noValidate
@@ -296,20 +347,6 @@ export default class App extends React.Component {
               />
               {formErrors.nome.length > 0 && (
                 <span className="errorMessage">{formErrors.nome}</span>
-              )}
-            </div>
-            <div className="lastName">
-              <label htmlFor="lastName" className="text-title-trabalho">Sobrenome</label>
-              <input
-                className={formErrors.sobrenome.length > 0 ? "error" : null}
-                placeholder="Sobrenome"
-                type="sobrenome"
-                name="sobrenome"
-                noValidate
-                onChange={this.handleChange}
-              />
-              {formErrors.sobrenome.length > 0 && (
-                <span className="errorMessage">{formErrors.sobrenome}</span>
               )}
             </div>
             <div className="firstName">
@@ -340,7 +377,36 @@ export default class App extends React.Component {
                 <span className="errorMessage">{formErrors.cidade}</span>
               )}
             </div>
+            <div className="firstName">
+              <label htmlFor="telefone" className="text-title-trabalho">Bairro</label>
+              <input
+                className={formErrors.bairro.length > 0 ? "error" : null}
+                placeholder="Bairro da Empresa"
+                type="bairro"
+                name="bairro"
+                noValidate
+                onChange={this.handleChange}
+              />
+              {formErrors.bairro.length > 0 && (
+                <span className="errorMessage">{formErrors.bairro}</span>
+              )}
+            </div>
             <div className="lastName">
+              <label htmlFor="telefone" className="text-title-trabalho">CEP</label>
+              <input
+                className={formErrors.cep.length > 0 ? "error" : null}
+                placeholder="CEP da Empresa"
+                type="cep"
+                name="cep"
+                noValidate
+                onChange={this.handleChange}
+              />
+              {formErrors.cep.length > 0 && (
+                <span className="errorMessage">{formErrors.cep}</span>
+              )}
+            </div>
+            
+            <div className="firstName">
               <label htmlFor="telefone" className="text-title-trabalho">Telefone</label>
               <input
                 className={formErrors.telefone.length > 0 ? "error" : null}

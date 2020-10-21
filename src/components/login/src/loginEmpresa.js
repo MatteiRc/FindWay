@@ -93,7 +93,7 @@ export default class App extends React.Component {
   handleSubmit = e => {
       e.preventDefault();
       const usuario = {
-        nome: this.state.nome + ' ' + this.state.sobrenome,
+        nome: this.state.nome,
         senha: this.state.password,
         telefone: this.state.telefone,
         estado: this.state.estado,

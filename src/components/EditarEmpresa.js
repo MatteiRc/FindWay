@@ -4,33 +4,33 @@ import ReactDOM from "react-dom";
 import axios from 'axios';
 import './login/src/id.css';
 const emailRegex = RegExp(
-  /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-);
-const numeroRegex = RegExp(
-  /\(\d{2,}\) \d{4,}\-\d{4}/
-);
-const cidadeEstadoRegex = RegExp(
+    /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+  );
+  const numeroRegex = RegExp(
+    /\(\d{2,}\) \d{4,}\-\d{4}/
+  );
+  const cidadeEstadoRegex = RegExp(
     /^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s]*$/
-);
-const cepRegex = RegExp(
+  );
+  const cepRegex = RegExp(
     /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/
   );
   const cnpjRegex = RegExp(
     /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/
   );
-const formValid = ({ formErrors, ...rest }) => {
-  let valid = true;
-
-  Object.values(formErrors).forEach(val => {
-    val.length > 0 && (valid = false);
-  });
-
-  Object.values(rest).forEach(val => {
-    val === null && (valid = false);
-  });
-
-  return valid;
-};
+  const formValid = ({ formErrors, ...rest }) => {
+    let valid = true;
+  
+    Object.values(formErrors).forEach(val => {
+      val.length > 0 && (valid = false);
+    });
+  
+    Object.values(rest).forEach(val => {
+      val === null && (valid = false);
+    });
+  
+    return valid;
+  };
 
 const id_usuario = window.localStorage.getItem("id");
 
@@ -40,7 +40,7 @@ export default class App extends React.Component {
 
     this.state = {
         nome: null,
-        sobrenome: null,
+        sobrenome: ' ',
         email: null,
         emailLogin: null,
         password: null,
@@ -55,18 +55,18 @@ export default class App extends React.Component {
         cargo: null,
         confirmarSenha: null,
         value:true,
-        aprovadoEmail: null,
+        aprovadoEmail: true,
         aprovadoConfirmarSenha: null,
-        aprovadoNome: false,
+        aprovadoNome: true,
         aprovadoSobrenome: true,
-        aprovadoEstado: null,
-        aprovadoCidade: null,
-        aprovadoBairro: null,
-        aprovadoCep: null,
-        aprovadoCnpj: null,
-        aprovadoEmpresa: null,
-        aprovadoCargo: null,
-        aprovadoTelefone: null,
+        aprovadoEstado: true,
+        aprovadoCidade: true,
+        aprovadoBairro: true,
+        aprovadoCep: true,
+        aprovadoCnpj: true,
+        aprovadoEmpresa: true,
+        aprovadoCargo: true,
+        aprovadoTelefone: true,
         formErrors: {
           nome: "",
           sobrenome: "",
@@ -90,15 +90,15 @@ export default class App extends React.Component {
   axios.get('http://localhost:3001/usuario/'+id_usuario).then(res=>{
     this.setState({email: res.data.email});
     this.setState({password: res.data.senha});
+    this.setState({cep: res.data.cep});
+    this.setState({cargo: res.data.cargo});
+    this.setState({bairro: res.data.bairro});
+    this.setState({cnpj: res.data.cnpj});
+    this.setState({empresa: res.data.empresa});
     this.setState({nome: res.data.nome});
-    this.setState({sobrenome: res.data.nome});
     this.setState({estado: res.data.estado});
     this.setState({cidade: res.data.cidade});
-    this.setState({bairro: res.data.bairro});
     this.setState({telefone: res.data.telefone});
-    this.setState({empresa: res.data.empresa});
-    this.setState({cep: res.data.cep});
-    this.setState({cnpj: res.data.cnpj});
   });
   
  }
@@ -106,7 +106,7 @@ export default class App extends React.Component {
   handleSubmit = e => {
       e.preventDefault();
       const usuario = {
-        nome: this.state.nome + ' ' + this.state.sobrenome,
+        nome: this.state.nome,
         senha: this.state.password,
         telefone: this.state.telefone,
         estado: this.state.estado,
@@ -128,7 +128,7 @@ export default class App extends React.Component {
         axios.post('http://localhost:3001/updateUsuario/'+id_usuario,usuario)
        .then(res =>{
         localStorage.setItem("id_usuario", res.data);
-         window.location.href = "http://localhost:3000/usuariologado";
+         window.location.href = "http://localhost:3000/empresalogado";
        })
        
     }else{
@@ -176,79 +176,79 @@ export default class App extends React.Component {
  
     switch (name) {
         case "nome":
-            formErrors.nome =
-            (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Nome invalido";
-            this.setState({aprovadoNome: (value.length > 3) && cidadeEstadoRegex.test(value)});
-            break;
-          case "sobrenome":
-            formErrors.sobrenome =
-            (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Sobrenome invalida";
-            this.setState({aprovadoSobrenome: (value.length > 3) && cidadeEstadoRegex.test(value)});
-            break;
-          case "cidade":
-            formErrors.cidade =
-              (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Cidade invalida";
-              this.setState({aprovadoCidade: (value.length > 3) && cidadeEstadoRegex.test(value)});
-            break;
-          case "bairro":
-            formErrors.bairro =
-              (value.length > 3) ? "" : "Bairro invalido";
-              this.setState({aprovadoBairro: (value.length > 3)});
-            break;
-          case "cep":
-              formErrors.cep =
-              (value.length > 3) && cepRegex.test(value) ? "" : "exemplo 111.111.111-11";
-              this.setState({aprovadoCep: (value.length > 3) && cepRegex.test(value)});
-            break;
-          case "cnpj":
-              formErrors.cnpj =
-              (value.length > 3) && cnpjRegex.test(value) ? "" : "exemplo 11.111.111/1111-11";
-              this.setState({aprovadoCnpj: (value.length > 3) && cnpjRegex.test(value)});
-            break;
-          case "empresa":
-              formErrors.empresa =
-                (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Empresa invalida";
-                this.setState({aprovadoEmpresa: (value.length > 3) && cidadeEstadoRegex.test(value)});
-              break;
-          case "cargo":
-              formErrors.cargo =
-                (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Cargo invalido";
-                this.setState({aprovadoCargo: (value.length > 3) && cidadeEstadoRegex.test(value)});
-              break;
-          case "telefone":
-            formErrors.telefone = (numeroRegex.test(value) && value.length <= 19 && value.length >= 17)
-              ? ""
-              : "exemplo +55 (11) 11111-1111";
-              this.setState({aprovadoTelefone: (numeroRegex.test(value) && value.length <= 19 && value.length >= 17)});
-            break;
-          case "estado":
-            formErrors.estado =
-            (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Estado invalido";
-            this.setState({aprovadoEstado: (value.length > 3) && cidadeEstadoRegex.test(value)});
-            break;
-          case "email":
-            formErrors.email = emailRegex.test(value)
-              ? ""
-              : "email invalido";
-              this.setState({aprovadoEmail: emailRegex.test(value)});
-            break;
-          case "emailLogin":
-            formErrors.emailLogin = emailRegex.test(value)
-              ? ""
-              : "email invalido";
-            break;
-          case "password":
-            formErrors.password =
-              value.length < 6 ? "minimo 6 caracteres" : "";
-            formErrors.confirmarSenha =
-              this.state.confirmarSenha === value ? "" : "Por favor insira a mesma senha novamente";
-              this.setState({aprovadoConfirmarSenha: this.state.password === value});
-            break;
-            case "confirmarSenha":
-              formErrors.confirmarSenha =
-                value === this.state.password ? "" : "Por favor insira a mesma senha novamente";
-                this.setState({aprovadoConfirmarSenha: value === this.state.password });
-              break;
+        formErrors.nome =
+        (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Nome invalido";
+        this.setState({aprovadoNome: (value.length > 3) && cidadeEstadoRegex.test(value)});
+        break;
+      case "sobrenome":
+        formErrors.sobrenome =
+        (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Sobrenome invalida";
+        this.setState({aprovadoSobrenome: (value.length > 3) && cidadeEstadoRegex.test(value)});
+        break;
+      case "cidade":
+        formErrors.cidade =
+          (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Cidade invalida";
+          this.setState({aprovadoCidade: (value.length > 3) && cidadeEstadoRegex.test(value)});
+        break;
+      case "bairro":
+        formErrors.bairro =
+          (value.length > 3) ? "" : "Bairro invalido";
+          this.setState({aprovadoBairro: (value.length > 3)});
+        break;
+      case "cep":
+          formErrors.cep =
+          (value.length > 3) && cepRegex.test(value) ? "" : "exemplo 111.111.111-11";
+          this.setState({aprovadoCep: (value.length > 3) && cepRegex.test(value)});
+        break;
+      case "cnpj":
+          formErrors.cnpj =
+          (value.length > 3) && cnpjRegex.test(value) ? "" : "exemplo 11.111.111/1111-11";
+          this.setState({aprovadoCnpj: (value.length > 3) && cnpjRegex.test(value)});
+        break;
+      case "empresa":
+          formErrors.empresa =
+            (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Empresa invalida";
+            this.setState({aprovadoEmpresa: (value.length > 3) && cidadeEstadoRegex.test(value)});
+          break;
+      case "cargo":
+          formErrors.cargo =
+            (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Cargo invalido";
+            this.setState({aprovadoCargo: (value.length > 3) && cidadeEstadoRegex.test(value)});
+          break;
+      case "telefone":
+        formErrors.telefone = (numeroRegex.test(value) && value.length <= 19 && value.length >= 17)
+          ? ""
+          : "exemplo +55 (11) 11111-1111";
+          this.setState({aprovadoTelefone: (numeroRegex.test(value) && value.length <= 19 && value.length >= 17)});
+        break;
+      case "estado":
+        formErrors.estado =
+        (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Estado invalido";
+        this.setState({aprovadoEstado: (value.length > 3) && cidadeEstadoRegex.test(value)});
+        break;
+      case "email":
+        formErrors.email = emailRegex.test(value)
+          ? ""
+          : "email invalido";
+          this.setState({aprovadoEmail: emailRegex.test(value)});
+        break;
+      case "emailLogin":
+        formErrors.emailLogin = emailRegex.test(value)
+          ? ""
+          : "email invalido";
+        break;
+      case "password":
+        formErrors.password =
+          value.length < 6 ? "minimo 6 caracteres" : "";
+        formErrors.confirmarSenha =
+          this.state.confirmarSenha === value ? "" : "Por favor insira a mesma senha novamente";
+          this.setState({aprovadoConfirmarSenha: this.state.password === value});
+        break;
+        case "confirmarSenha":
+          formErrors.confirmarSenha =
+            value === this.state.password ? "" : "Por favor insira a mesma senha novamente";
+            this.setState({aprovadoConfirmarSenha: value === this.state.password });
+          break;
       default:
         break;
     }
@@ -257,58 +257,9 @@ export default class App extends React.Component {
   };
   Message (state)  {
     const { formErrors } = this.state;
-    if (state === true) {
       return(
         <div>
-          <form method="get" action="/">
-            <button>
-                <span className="mr-2"> 
-                  <i className="fas fa-arrow-left"></i>
-                </span>
-                  Voltar
-            </button>
-          </form>
-          <div className="text-title-trabalho col-10 mx-auto text-center text-slanted my-5">
-              <h2>Login da Empresa</h2>
-            </div>
-          <form onSubmit={this.handleLogin} noValidate method = "POST" >
-            <div className="email">
-              <label htmlFor="emailLogin" className="text-title-trabalho">Email da Empresa</label>
-              <input
-                className={formErrors.emailLogin.length > 0 ? "error" : null}
-                placeholder="Email"
-                type="email"
-                name="emailLogin"
-                noValidate
-                onChange={this.handleChange}
-              />
-              {formErrors.emailLogin.length > 0 && (
-                <span className="errorMessage">{formErrors.emailLogin}</span>
-              )}
-            </div>
-            <div className="password">
-            <label htmlFor="passwordLogin" className="text-title-trabalho">Senha</label>
-              <input
-                className={formErrors.passwordLogin.length > 0 ? "error" : null}
-                placeholder="Password"
-                type="password"
-                name="passwordLogin"
-                noValidate
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="createAccount">
-                <button type="submit">Login</button>
-              <small className="clique" onClick={this.handleClick}>Cadastre-se gratis!</small>
-            </div>
-          </form>
-        </div>
-      )
-    }
-    else{
-      return(
-        <div>
-          <form method="get" action="/">
+          <form method="get" action="/empresalogado">
             <button>
                 <span className="mr-2">
                   <i className="fas fa-arrow-left"></i>
@@ -318,10 +269,11 @@ export default class App extends React.Component {
           </form>
           <p></p>
           <form onSubmit={this.handleSubmit} noValidate method = "POST">
-           <div className="email">
+          <div className="email">
               <label htmlFor="email" className="text-title-trabalho">Email da Empresa</label>
               <input
                 className={formErrors.email.length > 0 ? "error" : null}
+                value= {this.state.email}
                 placeholder="Email"
                 type="email"
                 name="email"
@@ -336,6 +288,7 @@ export default class App extends React.Component {
               <label htmlFor="password" className="text-title-trabalho">Senha</label>
               <input
                 className={formErrors.password.length > 0 ? "error" : null}
+                value= {this.state.password}
                 placeholder="Senha"
                 type="password"
                 name="password"
@@ -364,6 +317,7 @@ export default class App extends React.Component {
               <label htmlFor="nome" className="text-title-trabalho">Nome da Empresa</label>
               <input
                 className={formErrors.empresa.length > 0 ? "error" : null}
+                value= {this.state.empresa}
                 placeholder="Nome da Empresa"
                 type="nome"
                 name="empresa"
@@ -378,6 +332,7 @@ export default class App extends React.Component {
               <label htmlFor="nome" className="text-title-trabalho">Funcionário</label>
               <input
                 className={formErrors.nome.length > 0 ? "error" : null}
+                value= {this.state.nome}
                 placeholder="Nome do Funcionário"
                 type="nome"
                 name="nome"
@@ -392,6 +347,7 @@ export default class App extends React.Component {
               <label htmlFor="nome" className="text-title-trabalho">Cargo</label>
               <input
                 className={formErrors.cargo.length > 0 ? "error" : null}
+                value= {this.state.cargo}
                 placeholder="Cargo do fucionário"
                 type="nome"
                 name="cargo"
@@ -406,6 +362,7 @@ export default class App extends React.Component {
               <label htmlFor="firstName" className="text-title-trabalho">Estado</label>
               <input
                 className={formErrors.estado.length > 0 ? "error" : null}
+                value= {this.state.estado}
                 placeholder="Estado"
                 type="estado"
                 name="estado"
@@ -420,6 +377,7 @@ export default class App extends React.Component {
               <label htmlFor="telefone" className="text-title-trabalho">Cidade</label>
               <input
                 className={formErrors.cidade.length > 0 ? "error" : null}
+                value= {this.state.cidade}
                 placeholder="Cidade"
                 type="cidade"
                 name="cidade"
@@ -434,6 +392,7 @@ export default class App extends React.Component {
               <label htmlFor="telefone" className="text-title-trabalho">Bairro</label>
               <input
                 className={formErrors.bairro.length > 0 ? "error" : null}
+                value= {this.state.bairro}
                 placeholder="Bairro da Empresa"
                 type="bairro"
                 name="bairro"
@@ -448,6 +407,7 @@ export default class App extends React.Component {
               <label htmlFor="telefone" className="text-title-trabalho">CEP</label>
               <input
                 className={formErrors.cep.length > 0 ? "error" : null}
+                value= {this.state.cep}
                 placeholder="CEP da Empresa"
                 type="cep"
                 name="cep"
@@ -462,6 +422,7 @@ export default class App extends React.Component {
               <label htmlFor="telefone" className="text-title-trabalho">CNPJ</label>
               <input
                 className={formErrors.cnpj.length > 0 ? "error" : null}
+                value= {this.state.cnpj}
                 placeholder="CNPJ da Empresa"
                 type="cnpj"
                 name="cnpj"
@@ -476,6 +437,7 @@ export default class App extends React.Component {
               <label htmlFor="telefone" className="text-title-trabalho">Telefone</label>
               <input
                 className={formErrors.telefone.length > 0 ? "error" : null}
+                value= {this.state.telefone}
                 placeholder="Telefone"
                 type="telefone"
                 name="telefone"
@@ -492,7 +454,6 @@ export default class App extends React.Component {
           </form>
         </div>
       )
-    }
   }
 
    handleClick = () => {

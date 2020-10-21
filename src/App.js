@@ -17,6 +17,7 @@ import ListaProduto from './components/ListaProdutoLogado.js';
 import DetalhesLogado from './components/DetalhesLogado.js';
 import EditarCadastro from './components/EditarCadastro.js';
 import ListaServicos from './components/ListaServicos.js';
+import ListaVagas from './components/ListaVagas.js';
 import EmpresaLogado from './components/ListaVagasLogado.js'
 import EditarServicos from './components/EditarServico.js';
 import EditarEMpresa from './components/EditarEmpresa.js';
@@ -36,6 +37,7 @@ function App() {
         <Route path="/empresalogado" component={EmpresaLogado} />
         <Route path="/editarcadastro" component={EditarCadastro} />
         <Route path="/listaservicos" component={ListaServicos} />
+        <Route path="/listavagas" component={ListaVagas} />
         <Route path="/editarservicos" component={EditarServicos} />
         <Route path="/editarempresa" component={EditarEMpresa} />
         <Route component={Default} />
