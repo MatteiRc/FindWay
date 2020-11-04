@@ -11,11 +11,11 @@ import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
+/*import TableContainer from '@material-ui/core/TableContainer';*/
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import '../App.css';
+import './Adm.css';
 import {
     Input
   } from "mdbreact";
@@ -211,7 +211,7 @@ export default class ListaProduto extends Component {
 	
 	if ( this.state.displayUsuarios ) {
      var usuarios = (
-     <div>
+     <div id='Tabelas'>
 	    <th>ID</th>
 		<th>Nome</th>
 		<th>Telefone</th>
@@ -229,7 +229,7 @@ export default class ListaProduto extends Component {
 	
 	if ( this.state.displayCurriculos ) {
      var curriculos = (
-     <div>
+     <div id='Tabelas'>
 	 		<th>ID</th>
 			<th>ID_Usuario</th>
 			<th>Descrição</th>
@@ -242,7 +242,7 @@ export default class ListaProduto extends Component {
 	
 	if ( this.state.displayEmpresas ) {
      var empresas = (
-     <div>
+     <div id='Tabelas'>
 			<th>ID</th>
 			<th>Nome</th>
 			<th>Telefone</th>
@@ -261,7 +261,7 @@ export default class ListaProduto extends Component {
 	}
 	if ( this.state.displayVagas ) {
      var vagas = (
-     <div>
+     <div id='Tabelas'>
 			<th>ID</th>
 			<th>ID_Usuario</th>
 			<th>Descrição</th>
@@ -275,9 +275,8 @@ export default class ListaProduto extends Component {
     return (
       <div>
             <Titulo nome="Painel de administrador"></Titulo>
-			      <Button onClick={this.displayUsuarios} 
-				  variant="contained">Usuarios</Button>
 
+			<Button onClick={this.displayUsuarios}  variant="contained">Usuarios</Button>
 			<Button onClick={this.displayCurriculos}  variant="contained">Curriculos</Button>
 			<Button onClick={this.displayEmpresas}  variant="contained">Empresas</Button>
 			<Button onClick={this.displayVagas}  variant="contained">Vagas</Button>
