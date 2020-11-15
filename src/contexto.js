@@ -23,7 +23,7 @@ class ProvedorServico extends Component {
                 preco: data[i].valor+'/hora',
                 nome: data[i].usuario,
                 info: data[i].descricao,
-                horario: data[i].horarios, 
+                horario: data[i].horarios,
                 cidade: data[i].cidade,
                 classificacao: (data[i].classificacao/data[i].total),
                 favorito: false

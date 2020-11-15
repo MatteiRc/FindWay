@@ -60,6 +60,7 @@ export default class ListaProduto extends Component {
         preco: data[i].valor+'/hora',
         nome: data[i].usuario,
         info: data[i].descricao,
+        categoria: data[i].categoria,
         classificacao: (data[i].classificacao/data[i].total),
         favorito: false
       }
@@ -80,7 +81,7 @@ export default class ListaProduto extends Component {
             <ConsumidorServico>
                     {valor => (
                         <div className="img-container p-3" onClick={()=> valor.handleDetalhe(servico.id)}> 
-                            <Link to="/detalheslogado">
+                            <Link to="/detalhesvaga">
                                 <img src={servico.img} alt="product" className="card-img-top" />  
                             </Link>
                         </div>
@@ -158,7 +159,7 @@ export default class ListaProduto extends Component {
             <div className="row">
             <div className="col">
                 <center>
-                  <Titulo nome="" titulo="Currículos"></Titulo>
+                  <Titulo nome="" titulo="Vagas"></Titulo>
                   <p>
                   <span>
                     <i class="fas fa-search"></i>
@@ -173,7 +174,8 @@ export default class ListaProduto extends Component {
             </div>
             <div className="row">
               {filteredServicos.map(servico => {
-                return this.renderservico(servico);
+                if(servico.categoria === "vaga")
+                  return this.renderservico(servico);
               })}
             </div>
           </div>

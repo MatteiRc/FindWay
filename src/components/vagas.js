@@ -15,7 +15,7 @@ const InitialState ={
     horarios:"",
     valor: 10,
     imagem:"",
-    categorias: "curriculo",
+    categorias: "vaga",
     classificacao:0},
     idUsuario:"",
     isInvalid: false,
@@ -43,7 +43,7 @@ export default class Servico extends Component{
          Axios.post(url,data).then(res=>{
              console.log(res);
          })
-         window.location.href = "http://localhost:3000/usuariologado";
+         window.location.href = "http://localhost:3000/empresalogado";
 
      }
 
@@ -119,7 +119,7 @@ export default class Servico extends Component{
                 </form>
                 <div class = "form">
                 <div class = "input area">
-                <label for = "titulo">Objetivo</label>
+                <label for = "titulo">Titulo</label>
                 <br/>
                 <input type = "text" name = "titulo" id = "titulo" onChange ={e => this.updateField(e)}/>
                 </div>
@@ -127,26 +127,26 @@ export default class Servico extends Component{
                 </div>
                 <div class = "input area">
                 <br/>
-                <label for = "descricao">Resumo de Qualificações</label>
+                <label for = "descricao">Descrição</label>
                 <br/>
                 <textarea type = "text" name = "descricao" id = "descricao" onChange = {e => this.updateField(e)}/>
                 </div>
                 <div class = "input area">
                 <br/>
-                <label for = "horarios">Formação Acadêmica</label>
+                <label for = "horarios">Requisitos</label>
                 <br/>
                 <textarea type = "text" name = "horarios" id = "horarios" onChange = {e => this.updateField(e)}/>
                 </div>
                 <div class = "File">
                 <br/>
-                <label for = "imagem">Escolha uma foto para o currículo</label>
+                <label for = "imagem">Escolha uma foto</label>
                 <input type = "file" name="imagem" id="imagem" accept = "imagem/*" onChange ={ e => this.fileSelect(e) }/>
                 <br/>
                 <img id="foto" width = "100"/>
                 <br/>
                 </div>
                 <div class = "Button area">
-                <button id = "cadastrarservico" type = "submit" disabled = {this.state.isEmpty}>Cadastrar Currículo</button>
+                <button id = "cadastrarservico" type = "submit" disabled = {this.state.isEmpty}>Cadastrar Vaga</button>
                 </div>
             </div>
              </form>

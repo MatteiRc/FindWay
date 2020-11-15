@@ -8,9 +8,11 @@ import NavBarServ from './components/NavBarServ.js';
 import ListaProdutoLogado from './components/ListaProdutoNaoLogado.js';
 import Default from './components/Default.js';
 import DetalhesNaoLogado from './components/DetalhesNaoLogado.js';
+import DetalhesVaga from './components/DetalhesVaga.js';
 import Favoritos from './components/Favoritos/Favoritos.js';
 import DetalhesFav from './components/DetalhesFav.js';
 import Servicos from './components/Servicos.js'
+import Vagas from './components/vagas.js';
 import LoginCadastro from './components/login/src/index.js';
 import LoginEmpresa from './components/login/src/loginEmpresa.js'
 import ListaProduto from './components/ListaProdutoLogado.js';
@@ -32,7 +34,9 @@ function App() {
         <Route path="/loginEmpresa" component={LoginEmpresa} />
         <Route path="/favoritos" component={Favoritos} />
         <Route path="/detalhesfav" component={DetalhesFav} />
+        <Route path="/detalhesvaga" component={DetalhesVaga} />
         <Route path="/servicos" component={Servicos} />
+        <Route path="/vagas" component={Vagas} />
         <Route path="/usuariologado" component={ListaProduto} />
         <Route path="/empresalogado" component={EmpresaLogado} />
         <Route path="/editarcadastro" component={EditarCadastro} />

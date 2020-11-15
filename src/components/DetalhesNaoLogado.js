@@ -26,14 +26,10 @@ export default class Detalhes extends Component {
                                     <br/>
                                 </div>
                                 <div className="col-10 mx-auto col-md-6 my-3 text-capitalize">
-                                    <h4 className="text-autor text-uppercase mt-3 mb-2">
-                                        Nome: <span className="text-uppercase">
-                                        {nome}    
-                                        </span>
-                                    </h4>
-                                    <h4 id="informacao">Resumo de Qualificações</h4>
+                                    
+                                    <h4 id="informacao">Descrição: </h4>
                                     <p className="text-muted lead">{info}</p>
-                                    <h4 id="horario">Formação Acadêmica: </h4>
+                                    <h4 id="horario">Requisitos: </h4>
                                     <p className="text-muted lead">{horario}</p>   
                                     <div>
                                         <Link to='/'>

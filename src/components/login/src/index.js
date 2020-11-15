@@ -115,7 +115,7 @@ export default class App extends React.Component {
         axios.post('http://localhost:3001/usuario',usuario)
        .then(res =>{
          localStorage.setItem("id", res.data.id);
-         window.location.href = "http://localhost:3000/empresalogado";
+         window.location.href = "http://localhost:3000/usuariologado";
        }).catch(error=>{console.error(error.data)});
     }else{
       alert('Parece que o cadastro ainda está incompleto');

@@ -42,7 +42,7 @@ export default class ListaProduto extends Component {
           nome: data[i].usuario,
           info: data[i].descricao,
           classificacao: (data[i].classificacao/data[i].total),
-          categorias: data[i].categoria,
+          categoria: data[i].categoria,
           favorito: false
         }
         arr.push(servico);
@@ -65,7 +65,7 @@ export default class ListaProduto extends Component {
         nome: data[i].usuario,
         info: data[i].descricao,
         classificacao: (data[i].classificacao/data[i].total),
-        categorias: data[i].categoria,
+        categoria: data[i].categoria,
         favorito: false
       }
       arr.push(servico);
@@ -179,7 +179,8 @@ export default class ListaProduto extends Component {
             </div>
             <div className="row">
               {filteredServicos.map(servico => {
-                return this.renderservico(servico);
+                if(servico.categoria === "vaga")
+                  return this.renderservico(servico);
               })}
             </div>
           </div>

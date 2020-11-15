@@ -16,7 +16,7 @@ export default class Navbar extends Component{
                 <div class="topnav-centered">
                 <a href="http://localhost:3000/usuariologado" class="active">Currículos</a>
                 </div>
-                    <a href="http://localhost:3000/servicos">Criar Vagas</a>
+                    <a href="http://localhost:3000/vagas">Criar Vagas</a>
                     <a href="http://localhost:3000/listavagas">Editar Vagas</a>
                     <a href="http://localhost:3000/editarempresa">Editar Cadastro</a>
                     <div class="topnav-right">
