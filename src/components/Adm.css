@@ -1,0 +1,18 @@
+#root{
+  color: #F0F0F7;
+  font-weight: bold;
+  background-color: #8257e5
+}
+#Tabelas{
+  background-color: white;
+  color: black;
+}
+
+[type="button"]{
+  margin: 6px !important;
+}
+[type="button"]:focus{
+  border: none;
+  background-color: #9871F5;
+  color: white;
+}
