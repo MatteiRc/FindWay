@@ -37,7 +37,6 @@ export default class Detalhes extends Component {
                     const {id, nome, img, info, preco, titulo, cidade, horario,classificacao, telefone} = valor.detalheServico;
                     return (
                         <React.Fragment>
-                        <NavBarEmpresa />
                         <div className="container py-5">
                             <div className="row">
                                 <div className="text-title-trabalho col-10 mx-auto text-center text-slanted my-5">

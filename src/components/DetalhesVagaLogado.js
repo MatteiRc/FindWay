@@ -47,17 +47,12 @@ export default class Detalhes extends Component {
                                     <h4 id="horario">Requisitos: </h4>
                                     <p className="text-muted lead">{horario}</p>        
                                     <div>
-                                        <form onSubmit={this.handleSubmit(id, id)} noValidate method = "POST">
-											<ButtonServicos>
-                                                Enviar curriculo
-                                            </ButtonServicos>
-										</form>
-										<Link to='/usuariologado'>
+                                        <Link to='/selecao'>
                                             <ButtonServicos>
                                                 <span className="mr-2"> 
-                                                    <i className="fas fa-arrow-left"></i>
+                                                    <i className="fas fa-arrow-right"></i>
                                                 </span>
-                                                Voltar
+                                            Enviar Currículo
                                             </ButtonServicos>
                                         </Link>
                                     </div>   

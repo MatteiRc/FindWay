@@ -19,11 +19,13 @@ import ListaProduto from './components/ListaProdutoLogado.js';
 import DetalhesLogado from './components/DetalhesLogado.js';
 import EditarCadastro from './components/EditarCadastro.js';
 import ListaServicos from './components/ListaServicos.js';
+import Selecao from './components/SelecaoCurriculo.js';
+import ConfirmarSelecao from './components/ConfirmarSelecao.js';
 import ListaVagas from './components/ListaVagas.js';
-import EmpresaLogado from './components/ListaVagasLogado.js'
+import EmpresaLogado from './components/ListaVagasLogado.js';
+import CurriculoRecebido from './components/CurriculoRecebido.js';
 import EditarServicos from './components/EditarServico.js';
 import EditarEMpresa from './components/EditarEmpresa.js';
-import AdmPainel from './components/AdmPainel.js';
 import DetalhesVagaLogado from './components/DetalhesVagaLogado.js';
 function App() {
   return (
@@ -41,13 +43,15 @@ function App() {
         <Route path="/vagas" component={Vagas} />
         <Route path="/usuariologado" component={ListaProduto} />
         <Route path="/empresalogado" component={EmpresaLogado} />
+        <Route path="/curriculorecebido" component={CurriculoRecebido} />
         <Route path="/editarcadastro" component={EditarCadastro} />
         <Route path="/listaservicos" component={ListaServicos} />
+        <Route path="/selecao" component={Selecao} />
+        <Route path="/confirmarselecao" component={ConfirmarSelecao} />
         <Route path="/listavagas" component={ListaVagas} />
         <Route path="/editarservicos" component={EditarServicos} />
         <Route path="/editarempresa" component={EditarEMpresa} />
-	<Route path="/detalhesvagalogado" component={DetalhesVagaLogado} />	
-	<Route path="/adm" component={AdmPainel} />
+	      <Route path="/detalhesvagalogado" component={DetalhesVagaLogado} />	
         <Route component={Default} />
         <Navbar />
         <NavBarFav />

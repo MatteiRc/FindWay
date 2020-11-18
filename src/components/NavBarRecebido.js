@@ -14,12 +14,12 @@ export default class Navbar extends Component{
         return (
             <div class="topnav">
                 <div class="topnav-centered">
-                <a href="http://localhost:3000/empresalogado" class="active">Currículos</a>
+                <a href="http://localhost:3000/empresalogado">Currículos</a>
                 </div>
                     <a href="http://localhost:3000/vagas">Criar Vagas</a>
                     <a href="http://localhost:3000/listavagas">Editar Vagas</a>
                     <a href="http://localhost:3000/editarempresa">Editar Cadastro</a>
-                    <a href="http://localhost:3000/curriculorecebido">Curriculos Recebidos</a>
+                    <a href="http://localhost:3000/curriculorecebido" class="active">Curriculos Recebidos</a>
                     <div class="topnav-right">
                     <a href="http://localhost:3000" onClick={this.clear}>Sair da Conta</a>
                 </div>
