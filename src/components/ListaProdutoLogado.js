@@ -81,7 +81,7 @@ export default class ListaProduto extends Component {
             <ConsumidorServico>
                     {valor => (
                         <div className="img-container p-3" onClick={()=> valor.handleDetalhe(servico.id)}> 
-                            <Link to="/detalhesvaga">
+                            <Link to="/detalhesvagalogado">
                                 <img src={servico.img} alt="product" className="card-img-top" />  
                             </Link>
                         </div>
@@ -91,7 +91,7 @@ export default class ListaProduto extends Component {
             {valor => (
               <div className="card-footer d-flex justify-content-between" onClick={()=> valor.handleDetalhe(servico.id)}>
                 <p className="align-self-center mb-0">
-                    <Link id="link" to='/detalheslogado'>   
+                    <Link id="link" to='/detalhesvagalogado'>   
                         {servico.titulo}
                     </Link>
                     </p>
