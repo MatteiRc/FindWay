@@ -12,6 +12,12 @@ const numeroRegex = RegExp(
 const cidadeEstadoRegex = RegExp(
     /^[A-Za-zÀ-ÖØ-öø-ÿ][A-Za-zÀ-ÖØ-öø-ÿ\s]*$/
 );
+const cepRegex = RegExp(
+  /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/
+);
+const cnpjRegex = RegExp(
+  /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/
+);
 const formValid = ({ formErrors, ...rest }) => {
   let valid = true;
 
@@ -42,14 +48,24 @@ export default class App extends React.Component {
       telefone: null,
       estado: null,
       cidade: null,
+      bairro: null,
+      cep: null,
+      cnpj: null,
+      empresa: null,
+      cargo: null,
       confirmarSenha: null,
       value:true,
       aprovadoEmail: true,
-      aprovadoConfirmarSenha: false,
+      aprovadoConfirmarSenha: null,
       aprovadoNome: true,
       aprovadoSobrenome: true,
       aprovadoEstado: true,
       aprovadoCidade: true,
+      aprovadoBairro: true,
+      aprovadoCep: true,
+      aprovadoCnpj: true,
+      aprovadoEmpresa: true,
+      aprovadoCargo: true,
       aprovadoTelefone: true,
       formErrors: {
         nome: "",
@@ -59,6 +75,11 @@ export default class App extends React.Component {
         password: "",
         passwordLogin: "",
         cidade: "",
+        bairro: "",
+        cep: "",
+        cnpj: "",
+        empresa: "",
+        cargo: "",
         estado: "",
         confirmarSenha: "",
         telefone: "",
@@ -74,6 +95,8 @@ export default class App extends React.Component {
     this.setState({estado: res.data.estado});
     this.setState({cidade: res.data.cidade});
     this.setState({telefone: res.data.telefone});
+    this.setState({cep: res.data.cep});
+    this.setState({bairro: res.data.bairro});
   });
   
  }
@@ -86,14 +109,16 @@ export default class App extends React.Component {
         telefone: this.state.telefone,
         estado: this.state.estado,
         cidade: this.state.cidade,
-        email: this.state.email
+        email: this.state.email,
+        cep: this.state.cep,
+        bairro: this.state.bairro,
        };
     //if (formValid(this.state)) 
     if(this.state.aprovadoNome === true && this.state.aprovadoSobrenome === true && 
        this.state.aprovadoEmail ===true && 
        this.state.aprovadoConfirmarSenha === true &&
        this.state.aprovadoEstado === true && this.state.aprovadoCidade === true && 
-       this.state.aprovadoTelefone === true){
+       this.state.aprovadoTelefone === true && this.state.aprovadoCep == true && this.state.aprovadoBairro == true){
 
         axios.post('http://localhost:3001/updateUsuario/'+id_usuario,usuario)
        .then(res =>{
@@ -147,14 +172,44 @@ export default class App extends React.Component {
     switch (name) {
       case "nome":
         formErrors.nome =
-          (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Nome invalido";
-          this.setState({aprovadoNome: (value.length > 3) && cidadeEstadoRegex.test(value)});
+        (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Nome invalido";
+        this.setState({aprovadoNome: (value.length > 3) && cidadeEstadoRegex.test(value)});
+        break;
+      case "sobrenome":
+        formErrors.sobrenome =
+        (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Sobrenome invalida";
+        this.setState({aprovadoSobrenome: (value.length > 3) && cidadeEstadoRegex.test(value)});
         break;
       case "cidade":
         formErrors.cidade =
           (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Cidade invalida";
           this.setState({aprovadoCidade: (value.length > 3) && cidadeEstadoRegex.test(value)});
         break;
+      case "bairro":
+        formErrors.bairro =
+          (value.length > 3) ? "" : "Bairro invalido";
+          this.setState({aprovadoBairro: (value.length > 3)});
+        break;
+      case "cep":
+          formErrors.cep =
+          (value.length > 3) && cepRegex.test(value) ? "" : "exemplo 111.111.111-11";
+          this.setState({aprovadoCep: (value.length > 3) && cepRegex.test(value)});
+        break;
+      case "cnpj":
+          formErrors.cnpj =
+          (value.length > 3) && cnpjRegex.test(value) ? "" : "exemplo 11.111.111/1111-11";
+          this.setState({aprovadoCnpj: (value.length > 3) && cnpjRegex.test(value)});
+        break;
+      case "empresa":
+          formErrors.empresa =
+            (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Empresa invalida";
+            this.setState({aprovadoEmpresa: (value.length > 3) && cidadeEstadoRegex.test(value)});
+          break;
+      case "cargo":
+          formErrors.cargo =
+            (value.length > 3) && cidadeEstadoRegex.test(value) ? "" : "Cargo invalido";
+            this.setState({aprovadoCargo: (value.length > 3) && cidadeEstadoRegex.test(value)});
+          break;
       case "telefone":
         formErrors.telefone = (numeroRegex.test(value) && value.length <= 19 && value.length >= 17)
           ? ""
@@ -181,12 +236,12 @@ export default class App extends React.Component {
         formErrors.password =
           value.length < 6 ? "minimo 6 caracteres" : "";
         formErrors.confirmarSenha =
-          this.state.confirmarSenha !== value ? "Por favor insira a mesma senha novamente" : "";
-          this.setState({aprovadoSenha: this.state.confirmarSenha === value});
+          this.state.confirmarSenha === value ? "" : "Por favor insira a mesma senha novamente";
+          this.setState({aprovadoConfirmarSenha: this.state.password === value});
         break;
         case "confirmarSenha":
           formErrors.confirmarSenha =
-            value !== this.state.password ? "Por favor insira a mesma senha novamente" : "";
+            value === this.state.password ? "" : "Por favor insira a mesma senha novamente";
             this.setState({aprovadoConfirmarSenha: value === this.state.password });
           break;
       default:
@@ -296,6 +351,36 @@ export default class App extends React.Component {
               />
               {formErrors.cidade.length > 0 && (
                 <span className="errorMessage">{formErrors.cidade}</span>
+              )}
+            </div>
+            <div className="firstName">
+              <label htmlFor="telefone" className="text-title-trabalho">Bairro</label>
+              <input
+                className={formErrors.bairro.length > 0 ? "error" : null}
+                value = {this.state.bairro}
+                placeholder="Bairro da Empresa"
+                type="bairro"
+                name="bairro"
+                noValidate
+                onChange={this.handleChange}
+              />
+              {formErrors.bairro.length > 0 && (
+                <span className="errorMessage">{formErrors.bairro}</span>
+              )}
+            </div>
+            <div className="lastName">
+              <label htmlFor="telefone" className="text-title-trabalho">CEP</label>
+              <input
+                className={formErrors.cep.length > 0 ? "error" : null}
+                value = {this.state.cep}
+                placeholder="CEP da Empresa"
+                type="cep"
+                name="cep"
+                noValidate
+                onChange={this.handleChange}
+              />
+              {formErrors.cep.length > 0 && (
+                <span className="errorMessage">{formErrors.cep}</span>
               )}
             </div>
             <div className="lastName">

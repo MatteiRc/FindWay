@@ -31,7 +31,7 @@ export default class ListaProduto extends Component {
       let arr = new Array();
       let data = JSON.parse(JSON.stringify(res.data));
       //console.log(data);
-      for(let i = 2; i < data.length; i++){
+      for(let i = (data.length - 1); i < data.length; i++){
         let servico = {
           id: data[i].id,
           titulo: data[i].titulo,
@@ -53,7 +53,7 @@ export default class ListaProduto extends Component {
   .then(res =>{
     let arr = new Array();
     let data = JSON.parse(JSON.stringify(res.data));
-    for(let i = 2; i < data.length; i++){
+    for(let i = (data.length - 1); i < data.length; i++){
       let servico = {
         id: data[i].id,
         titulo: data[i].titulo,

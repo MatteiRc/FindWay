@@ -7,18 +7,20 @@ import propTypes from 'prop-types';
 import "../styles/servicos.css"
 import Axios from 'axios';
 
-const baseUrl = "http://localhost:3001/updateAnuncio";
+const baseUrl = "http://localhost:3001/fazerAnuncio";
 const InitialState ={
     anuncio:{titulo:"",
-    cidade:"",
+    cidade: null,
     descricao:"",
     horarios:"",
-    valor:"",
-    imagem:""},
+    valor: 10,
+    imagem:"",
+    categorias: "curriculo",
+    classificacao:0},
     idUsuario:"",
     isInvalid: false,
     saved: false,
-    isEmpty:false
+    isEmpty:true
 }
 
 
@@ -31,13 +33,14 @@ export default class Servico extends Component{
      componentDidMount(){
         Axios.get('http://localhost:3001/anuncioUsuario/'+localStorage.getItem("id_servico")).then(res=>{
             let anuncio = {
-                titulo:res.data.titulo,
+                titulo: res.data.titulo,
                 cidade: res.data.cidade,
                 descricao: res.data.descricao,
                 horarios: res.data.horarios,
                 valor: res.data.valor,
                 imagem: ""
             }
+            console.log(res.data.titulo, res.data.imagem)
             this.setState({anuncio:anuncio});
             console.log(this.state);
         }).catch(error =>{
@@ -45,24 +48,23 @@ export default class Servico extends Component{
         })
     }
 
-     save(event){
-         event.preventDefault();
-         const url = baseUrl + "/" + window.localStorage.getItem("id_servico");
-         const data = new FormData();
-         data.append("file",this.state.anuncio.imagem);
-         data.append("cidade",this.state.anuncio.cidade);
-         data.append("descricao",this.state.anuncio.descricao);
-         data.append("horarios",this.state.anuncio.horarios);
-         data.append("valor",this.state.anuncio.valor);
-         data.append("titulo",this.state.anuncio.titulo);
-         Axios.post(url,data).then(res=>{
-             console.log(res);
-             window.localStorage.removeItem("id_servico");
-             window.location.href = "http://localhost:3000/listaservicos";
+    save(event){
+        event.preventDefault();
+        const url = baseUrl + "/" + window.localStorage.getItem("id");
+        const data = new FormData();
+        data.append("file",this.state.anuncio.imagem);
+        data.append("cidade",this.state.anuncio.cidade);
+        data.append("descricao",this.state.anuncio.descricao);
+        data.append("horarios",this.state.anuncio.horarios);
+        data.append("valor",this.state.anuncio.valor);
+        data.append("titulo",this.state.anuncio.titulo);
+        data.append("categoria", "curriculo");
+        Axios.post(url,data).then(res=>{
+            console.log(res);
+        })
+        window.location.href = "http://localhost:3000/usuariologado";
 
-         })
-
-     }
+    }
 
      updateField(event){
          const anuncio = {...this.state.anuncio};

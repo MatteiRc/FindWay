@@ -38,7 +38,7 @@ export default class Detalhes extends Component {
                                                 valor.addToFavoritos(id);
                                             else
                                                 valor.removeItem(id);
-                                            }}> Favorito -> 
+                                            }}> Favorito
                                             {favorito ? (
                                                 <i id="favoritado" className="fas fa-star"></i>
                                             ) : (
